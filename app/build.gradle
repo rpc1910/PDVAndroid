@@ -35,4 +35,7 @@ dependencies {
 
     //    Adiciona biblioteca no projeto
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'se.emilsjolander:sprinkles:1.3.1'
+
 }
+

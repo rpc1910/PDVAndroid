@@ -11,9 +11,15 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import br.com.rodrigop.pdv.R;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import br.com.rodrigop.pdv.R;
+import br.com.rodrigop.pdv.domain.model.Produto;
+import se.emilsjolander.sprinkles.Query;
+
+public class MainActivity extends BaseActivity {
+
+    List<Produto> produtos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        produtos = Query.all(Produto.class).get().asList();
+
+        if(produtos != null) {
+            for (Produto p : produtos) {
+                Log.d("Produto: ", p.getDescricao());
+            }
+        }
     }
 
     @Override
