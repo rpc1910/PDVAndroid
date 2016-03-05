@@ -2,6 +2,7 @@ package br.com.rodrigop.pdv.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,6 +21,7 @@ import java.io.IOException;
 
 import br.com.rodrigop.pdv.R;
 import br.com.rodrigop.pdv.domain.model.Produto;
+import br.com.rodrigop.pdv.domain.util.Base64Util;
 import br.com.rodrigop.pdv.domain.util.ImageInputHelper;
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -122,7 +124,9 @@ public class CadastroNovoActivity extends BaseActivity implements ImageInputHelp
             produto.setPreco(0.0);
         }
 
-        produto.setFoto("");
+        Bitmap imagem = ((BitmapDrawable)imageViewFotoProduto.getDrawable()).getBitmap();
+        produto.setFoto(Base64Util.encodeTobase64(imagem));
+
         produto.save();
 
         finish();

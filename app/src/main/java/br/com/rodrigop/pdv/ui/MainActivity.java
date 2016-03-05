@@ -36,12 +36,18 @@ public class MainActivity extends BaseActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
 
         produtos = Query.all(Produto.class).get().asList();
 
         if(produtos != null) {
             for (Produto p : produtos) {
-                Log.d("Produto: ", p.getDescricao());
+                Log.d("Produto: ", "Descrição: " + p.getDescricao());
+                Log.d("Produto: ", "Foto: " + p.getFoto());
             }
         }
     }
@@ -66,7 +72,8 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         }
         else if(id == R.id.action_edit) {
-            return true;
+            Intent telaEditar = new Intent(MainActivity.this, EditarProdutoActivity.class);
+            startActivity(telaEditar);
         }
 
 
