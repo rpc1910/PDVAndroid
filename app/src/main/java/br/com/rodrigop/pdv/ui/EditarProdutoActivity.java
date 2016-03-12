@@ -21,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.mapzen.android.lost.api.LocationListener;
+import com.mapzen.android.lost.api.LocationRequest;
 import com.mapzen.android.lost.api.LocationServices;
 import com.mapzen.android.lost.api.LostApiClient;
 
@@ -75,6 +77,22 @@ public class EditarProdutoActivity extends BaseActivity implements ImageInputHel
             latitude = location.getLatitude();
             longitude = location.getLongitude();
         }
+
+        // Define tempo de atualização da localização
+        LocationRequest request = LocationRequest.create()
+                .setInterval(5000)
+                .setSmallestDisplacement(10)
+                .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+
+        LocationListener listener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+        };
+
+        LocationServices.FusedLocationApi.requestLocationUpdates(request, listener);
 
         imageInputHelper = new ImageInputHelper(this);
         imageInputHelper.setImageActionListener(this);

@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PDV.iml" filepath="$PROJECT_DIR$/PDV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PDVAndroid.iml" filepath="$PROJECT_DIR$/PDVAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zXingLib/zXingLib.iml" filepath="$PROJECT_DIR$/zXingLib/zXingLib.iml" />
     </modules>
   </component>
 </project>
