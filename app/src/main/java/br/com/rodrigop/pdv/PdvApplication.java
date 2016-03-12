@@ -38,6 +38,15 @@ public class PdvApplication extends Application {
                                 ")"
                 );
 
+                db.execSQL(
+                        "CREATE TABLE item (" +
+                                "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                                "id_compra INTEGER,"+
+                                "id_produto TEXT,"+
+                                "quantidade INTEGER"+
+                                ")"
+                );
+
 
             }
 
