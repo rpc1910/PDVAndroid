@@ -3,6 +3,7 @@ package br.com.rodrigop.pdv.ui;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,6 +16,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import com.mapzen.android.lost.api.LocationServices;
+import com.mapzen.android.lost.api.LostApiClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,12 +46,28 @@ public class CadastroNovoActivity extends BaseActivity implements ImageInputHelp
 
     private Produto produto;
 
+    private double latitude = 0.0d;
+    private double longitude = 0.0d;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_novo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Conecta com a API de geolocalização
+        LostApiClient lostApiClient = new LostApiClient.Builder(this).build();
+        lostApiClient.connect();
+
+        Location location = LocationServices.FusedLocationApi.getLastLocation();
+        if (location != null) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        }
+
+        Log.d("LATITUDE", "" + latitude);
+        Log.d("LONGITUDE", "" + longitude);
 
         imageInputHelper = new ImageInputHelper(this);
         imageInputHelper.setImageActionListener(this);
@@ -126,6 +146,9 @@ public class CadastroNovoActivity extends BaseActivity implements ImageInputHelp
 
         Bitmap imagem = ((BitmapDrawable)imageViewFotoProduto.getDrawable()).getBitmap();
         produto.setFoto(Base64Util.encodeTobase64(imagem));
+
+        produto.setLatitude(latitude);
+        produto.setLongitude(longitude);
 
         produto.save();
 
