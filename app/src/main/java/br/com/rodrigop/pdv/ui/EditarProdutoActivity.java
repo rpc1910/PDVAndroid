@@ -61,6 +61,8 @@ public class EditarProdutoActivity extends BaseActivity implements ImageInputHel
     private double latitude = 0.0d;
     private double longitude = 0.0d;
 
+    private String teste;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
