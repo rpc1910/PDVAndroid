@@ -4,6 +4,8 @@
 
     <string name="action_novo">Novo Produto</string>
     <string name="action_edit">Editar Produto</string>
+    <string name="action_sincronizar">Sincronizar produtos</string>
     <string name="title_activity_cadastro_novo">Cadastrar Produto</string>
     <string name="title_activity_editar_produto">Editar Produto</string>
+    <string name="encerrar_compra">Encerrar compra</string>
 </resources>

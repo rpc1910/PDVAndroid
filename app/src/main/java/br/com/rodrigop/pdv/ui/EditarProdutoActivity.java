@@ -1,5 +1,6 @@
 package br.com.rodrigop.pdv.ui;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -33,11 +34,16 @@ import java.util.List;
 
 import br.com.rodrigop.pdv.R;
 import br.com.rodrigop.pdv.domain.model.Produto;
+import br.com.rodrigop.pdv.domain.network.APIClient;
 import br.com.rodrigop.pdv.domain.util.Base64Util;
 import br.com.rodrigop.pdv.domain.util.ImageInputHelper;
 import br.com.rodrigop.pdv.domain.util.SpinnerOption;
 import butterknife.Bind;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import se.emilsjolander.sprinkles.CursorList;
 import se.emilsjolander.sprinkles.Query;
 
@@ -62,6 +68,10 @@ public class EditarProdutoActivity extends BaseActivity implements ImageInputHel
     private double longitude = 0.0d;
 
     private String teste;
+
+    Callback<String> callbackEditarProduto;
+
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +126,10 @@ public class EditarProdutoActivity extends BaseActivity implements ImageInputHel
 
         // Alterado por Rodrigo
         List<SpinnerOption> barcodeListOption = new ArrayList<>();
+
+        configureNovoProdutoCallback();
+
+        dialog = new SpotsDialog(this, "Atualizando dados");
 
 
         for(Produto produto: produtos){
@@ -234,9 +248,44 @@ public class EditarProdutoActivity extends BaseActivity implements ImageInputHel
 
         produto.save();
 
+        dialog.show();
+
         Snackbar.make(view, "Produto alterado com sucesso!", Snackbar.LENGTH_SHORT).show();
 
+        // Salva produto no servidor
+        new APIClient().getRestService().updateProduto(
+                produto.getCodigoBarras(),
+                produto.getDescricao(),
+                produto.getUnidade(),
+                produto.getPreco(),
+                produto.getFoto(),
+                produto.getStatus(),
+                produto.getLatitude(),
+                produto.getLongitude(),
+                callbackEditarProduto
+        );
+
         //finish();
+    }
+
+
+    private void configureNovoProdutoCallback() {
+        callbackEditarProduto = new Callback<String>() {
+
+            @Override public void success(String resultado, Response response) {
+                dialog.dismiss();
+                //finish();
+            }
+
+            @Override public void failure(RetrofitError error) {
+                Log.e("RETROFIT", "Error:"+error.getMessage());
+                dialog.dismiss();
+
+                Toast.makeText(getApplicationContext(), "Não foi possível alterar o produto no servidor", Toast.LENGTH_SHORT).show();
+
+                // finish();
+            }
+        };
     }
 
 }

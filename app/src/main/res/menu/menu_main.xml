@@ -13,4 +13,16 @@
         android:orderInCategory="100"
         android:title="@string/action_edit"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sincronizar"
+        android:orderInCategory="100"
+        android:title="@string/action_sincronizar"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_encerrar"
+        android:orderInCategory="100"
+        android:title="@string/encerrar_compra"
+        app:showAsAction="never" />
 </menu>
