@@ -8,4 +8,9 @@
     <string name="title_activity_cadastro_novo">Cadastrar Produto</string>
     <string name="title_activity_editar_produto">Editar Produto</string>
     <string name="encerrar_compra">Encerrar compra</string>
+
+    <string name="title_activity_mapa">Mapa de produtos</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="mapa_de_produtos">Mapa de produtos</string>
 </resources>

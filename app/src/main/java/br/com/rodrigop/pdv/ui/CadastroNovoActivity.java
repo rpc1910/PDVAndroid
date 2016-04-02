@@ -124,13 +124,14 @@ public class CadastroNovoActivity extends BaseActivity implements ImageInputHelp
             }
         });
 
-
+        /*
         campoCodigoDeBarras.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 IntentIntegrator.initiateScan(CadastroNovoActivity.this, zxingLibConfig);
             }
         });
+        */
 
     }
 

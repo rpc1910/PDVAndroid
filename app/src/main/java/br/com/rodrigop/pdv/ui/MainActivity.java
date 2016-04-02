@@ -233,10 +233,16 @@ public class MainActivity extends BaseActivity {
 
             return true;
         }
-
+        // Encerra compra e envia para o servidor
         else if(id == R.id.action_encerrar) {
             encerrar();
             return true;
+        }
+
+        // Exibe tela de mapa
+        else if(id == R.id.action_mapa) {
+            Intent intent = new Intent(MainActivity.this, MapaActivity.class);
+            startActivity(intent);
         }
 
 

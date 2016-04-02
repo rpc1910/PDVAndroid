@@ -10,6 +10,7 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -88,6 +89,12 @@ public class APIClient {
                 @Body Compra compra,
                 Callback<String> callbakCompra
         );
+
+        @DELETE("/produto")
+        String deleteProduto(
+                @Query("id") String codigoBarras
+        );
+
     }
 
 
